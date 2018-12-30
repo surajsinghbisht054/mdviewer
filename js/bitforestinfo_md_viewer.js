@@ -1,3 +1,18 @@
+//								[ license ]
+//
+//                                 Apache License
+//                           Version 2.0, January 2004
+//                        http://www.apache.org/licenses/
+//
+// Please Read LICENCE file.
+//
+//
+// Author:
+//			Suraj Singh Bisht
+//			surajsinghbisht054@gmail.com
+//			bitforestinfo.com
+//			github.com/surajsinghbisht054
+//
 // --------------------------------------------------------------
 //                 Configuration - Start
 // ---------------------------------------------------------------
@@ -329,6 +344,8 @@ function InternalProcessors(argument){
 	argument = LittleProcessor(argument, '(~{2})(.+?)(~{2})', ['~~'],'<strike>', '</strike>');
 	// Inline Codes
 	argument = LittleProcessor(argument, '(`)(.+?)(`)', ['`'], '<code style="background: lavender;">','</code>');
+	// blockquote
+	argument = LittleProcessor(argument, '(>)(.+?)(\\n)', ['>','\n'], '<code style="background: red;">','</code>');
 
 	// Links Processor
 	argument = LinksProcessor(argument)
@@ -448,17 +465,23 @@ function preview() {
 	return;
 }
 
-// Event handling Mechanism
-var inptext = document.getElementsByClassName('Editor');
+// function to automatically, bind preview function with keyboard key
+function bindkey(){
+
+		// Event handling Mechanism
+		var inptext = document.getElementById(InputID);
 
 
-//	Check if its non IE
-if (inptext.Editor.addEventListener) {
-  	inptext.Editor.addEventListener('input', preview);
-}else{
-	if (inptext.Editor.attachEvent) {
-		inptext.Editor.attachEvent('onpropertychange', preview);
-	}
-}; 
-// Preview Call
-preview();
+		//	Check if its non IE
+		if (inptext.addEventListener) {
+		  	inptext.addEventListener('input', preview);
+		}else{
+			if (inptext.attachEvent) {
+				inptext.attachEvent('onpropertychange', preview);
+			}
+		}; 
+
+		// Preview Call
+		preview();
+
+}

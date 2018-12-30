@@ -1,51 +1,75 @@
 <!DOCTYPE html>
 <html>
+
+<!--
+								 -----------------
+								[ READ ME COMMENT ]
+		 						 -----------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+
+For Detail About This Project, Please README.md file.
+
+
+METHOD To Use:
+	Use <textarea  id="MDEditor"> as Input.
+	Use <div  id="MDViewerPreview"> as Output.
+
+	Add Header:
+
+		https://raw.githubusercontent.com/surajsinghbisht054/mdviewer/master/css/mdviewer.css <== Not That Important
+		<link rel="stylesheet" type="text/css" href="./css/mdviewer.css">
+
+		https://raw.githubusercontent.com/surajsinghbisht054/mdviewer/master/js/bitforestinfo_md_viewer.js
+		<script src="./js/bitforestinfo_md_viewer.js"></script>
+
+	Add In Bottom:
+	
+		<script type="text/javascript">
+			// Bind Keys To Automatically Trigger Preveiw Function, At Every Key press event
+			bindkey();
+			// Or Manually, Call
+			preview();
+
+		</script>
+
+
+	[ --- If You Want To Use Internal Functionality In Custom Way, Then ]
+	
+	// Call Markdown To html Conversion function
+		var nodes = MDTOHTML(inptext, outtext);
+	
+		// if nodes
+		if (nodes) {
+			outtext.innerHTML = nodes;
+		};
+
+
+-->
+
+
 <head>
 	<title> MDViewer - Index</title>
 	<!-- Include Javascript -->
 
 	<meta charset="UTF-8">
 
-<!-- Style Sheet-->
-<style type="text/css">
+	<!--	https://raw.githubusercontent.com/surajsinghbisht054/mdviewer/master/css/mdviewer.css -->
+	<link rel="stylesheet" type="text/css" href="./css/mdviewer.css">
 
-.Editor{
-	background: lavender;
-	border-style: solid;
-	border-width: thin;
-	border-color: darksalmon;
-	/*
-	overflow-y: scroll;
-	overflow-x: scroll;
-	*/
-	height: 500px;
-	resize: none;
-	font-size: medium;
-	width:100%;
-
-	
-}
-.MDViewerPreview {
-	width: 100%;
-	border-style: solid;
-	border-width: thin;
-	height: 600px;
-	background-color: aliceblue;
-	overflow-y: scroll;
-	/**/
-
-}
+	<!-- https://raw.githubusercontent.com/surajsinghbisht054/mdviewer/master/js/bitforestinfo_md_viewer.js -->
+	<script src="./js/bitforestinfo_md_viewer.js"></script>
 
 
 
-</style>
 </head>
 <body style="font-size: small;">
 
-	<div id="maincontainer" style="display: grid; grid-template-columns: 1fr 1fr;">
-		
-		<div id="EditorContainer">
-			<textarea name="Editor" class="Editor" id="MDEditor">
+<textarea id="MDEditor">
 
 
 ---
@@ -303,19 +327,16 @@ It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 
 			</textarea>
-		</div>
-
-		<!-- Preview Div Tag-->
 		<div id="MDViewerPreview">
 		</div>
 
+		<blockquote /> here
+		Yes
 
-	</div>
-
-<!-- Load Script-->
-<script type="text/javascript" src="./js/bitforestinfo_md_viewer.js">
+<script type="text/javascript">
+	// Bind Keys
+	bindkey();
 </script>
-
 
 </body>
 </html>

@@ -1,0 +1,31 @@
+
+#MDEditor {
+	background: lavender;
+	border-style: solid;
+	border-width: thin;
+	border-color: darksalmon;
+	/*
+	overflow-y: scroll;
+	overflow-x: scroll;
+	*/
+	height: 500px;
+	resize: none;
+	font-size: medium;
+	width:49%;
+
+	
+}
+#MDViewerPreview {
+	width: 49%;
+	border-style: solid;
+	border-width: thin;
+	height: 600px;
+	background-color: aliceblue;
+	overflow-y: scroll;
+	margin-top: 0%;
+	margin-right: 0%;
+	float: right;
+	/**/
+
+}
+
