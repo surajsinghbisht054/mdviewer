@@ -47,12 +47,12 @@ METHOD To Use:
 
 	Add Header:
 
-		https://raw.githubusercontent.com/surajsinghbisht054/mdviewer/master/css/mdviewer.css <== Not That Important
-		<link rel="stylesheet" type="text/css" href="./css/mdviewer.css">
+	<!--	http://cdn.jsdelivr.net/gh/surajsinghbisht054/mdviewer/css/mdviewer.css -->
+	<link rel="stylesheet" type="text/css" href="./css/mdviewer.css">
 
-		https://raw.githubusercontent.com/surajsinghbisht054/mdviewer/master/js/bitforestinfo_md_viewer.js
-		<script src="./js/bitforestinfo_md_viewer.js"></script>
-
+	<!-- http://cdn.jsdelivr.net/gh/surajsinghbisht054/mdviewer/js/bitforestinfo_md_viewer.js -->
+	<script src="./js/bitforestinfo_md_viewer.js"></script>
+	
 	Add In Bottom:
 	
 		<script type="text/javascript">
