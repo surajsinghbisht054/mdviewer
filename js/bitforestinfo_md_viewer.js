@@ -60,11 +60,11 @@ var EXP_JOINER  = '|'
 
 // All Expression
 EXP_ALL = ''
+EXP_ALL = EXP_ALL + EXP_BLOCK_C + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_HRRULER + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_HEADING + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_TABLEBD + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_HEAD_HR + EXP_JOINER
-EXP_ALL = EXP_ALL + EXP_BLOCK_C + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_UL_LIST + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_OL_LIST + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_INDENTS + EXP_JOINER
@@ -428,16 +428,22 @@ function InternalProcessors(argument){
 
 function InlineRegex(argument){
 	//console.log('({})'.replace('{}',argument));
-
-	// heading Done
-	if (REGEX_HEADING.test(argument)){
-		return HEADINGPROCESSOR(argument);
+	// Code
+	if (REGEX_BLOCK_C.test(argument)){
+		return CDBLOCKPROCESSOR(argument);
+	} 	
+	// Indent Done
+	else if (REGEX_INDENTS.test(argument)){
+		return IndentProcessor(argument)
 	}
 	// Table
 	else if (REGEX_TABLEBD.test(argument)){
 		return TABLEPROCESSOR(argument);
+	}	
+	// Heading
+	else if (REGEX_HEADING.test(argument)){
+		return HEADINGPROCESSOR(argument);
 	}
-	
 	// Heading Horizontal Done
 	else if (REGEX_HEAD_HR.test(argument)){
 		return HRRULERPROCESSOR(argument);
@@ -450,18 +456,11 @@ function InlineRegex(argument){
 	else if (REGEX_OL_LIST.test(argument)){
 		return OrderListProcessor(argument);
 	}
-	// Code Block Done
-	else if (REGEX_BLOCK_C.test(argument)){
-		return CDBLOCKPROCESSOR(argument);
-	}
 	// Unordered List
 	else if (REGEX_UL_LIST.test(argument)){
 		return UnOrderListProcessor(argument);
 	}
-	// Indent Done
-	else if (REGEX_INDENTS.test(argument)){
-		return IndentProcessor(argument)
-	}
+	
 	// Inlines
 	else if (REGEX_INLINES.test(argument)){
 		return GLOBALPROCESSOR(argument);
