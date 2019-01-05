@@ -49,7 +49,7 @@ var OutputID = "MDViewerPreview";
 var EXP_HEADING = '(\n(#+)(.+))' 			// header
 var EXP_HRRULER = '(((\n)(---))|((\n)(___))|((\n)(\\*\\*\\*)))' // horizontal line
 var EXP_OL_LIST = '((\n( *)(\\d+)(\\. )(.*))+)'	// order list
-var EXP_BLOCK_C = '(\n(```)([^```]+)(```))' // code block
+var EXP_BLOCK_C = '(\n(```)([^]+?)\n(```))' // code block
 var EXP_UL_LIST = '((\n( *)([\-\+\*]+ )(.*))+)'  // unorder list
 var EXP_HEAD_HR = '((.+)\n((={3,})|(\\-{3,})))' // ALT heading
 var EXP_TABLEBD = '(\n(\\|?)([\\|\\w \\d]+)(\\|?)\n([ \\-\\|\\:]{7,})\n((\\|?)(.+)(\\|?)\n)+)' // Table
@@ -70,6 +70,7 @@ EXP_ALL = EXP_ALL + EXP_OL_LIST + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_INDENTS + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_INLINES
 
+
 // REGEX
 var REGEX_HEADING = new RegExp(EXP_HEADING);
 var REGEX_HRRULER = new RegExp(EXP_HRRULER);
@@ -87,13 +88,13 @@ DEFAULT_STYLE = [
 //	('Styles', 'Class') <-- Index Number is Key [Use Class for Bootstrap Features]
 	["", 'border p-1'], // 0== Blockquote
 	["", 'ml-5 p-2 border my-4'],	//1== Tab indents
-	['','my-2 mx-1'], // 2==> Global 
-	['','text-white p-3 my-2 bg-dark'], // 3==> Programming Codes 
-	['','p-1 px-2 m-2 text-capitalize'], // 4==> Headings
-	['','my-3'], // 5==> Horizontal Lines
-	['','ml-2'], // 6==> Order List
-	['','list-group ml-2'], // 7==> UnorderList
-	['',' table  mb-3 mt-1 ml-2 table-striped  table-bordered table-hover bg-light'], // 8==> Table
+	['','mx-1'], // 2==> Global 
+	['','text-white p-3 my-4 bg-dark'], // 3==> Programming Codes 
+	['','p-1 px-2 m-2 text-capitalize mt-5'], // 4==> Headings
+	['','my-4'], // 5==> Horizontal Lines
+	['','list-group ml-2 my-4'], // 6==> Order List
+	['','list-group ml-2 my-4'], // 7==> UnorderList
+	['',' table  mb-3 mt-1 ml-2 table-striped  table-bordered table-hover bg-light mb-4'], // 8==> Table
 	['','text-primary text-capitalize mx-2'], // 9 ==> Links
 	['','bg-secondary p-1 text-white'], // 10 ==> Inline Codes
 
@@ -296,7 +297,7 @@ function UnOrderListProcessor(argument){
 	var tmpobj = '';
 
 	for (var i = 0; i < argument.length; i++) {
-		tmpobj += '<li class="list-group-item">{}</li>'.replace('{}',argument[i])
+		tmpobj += '<li class="list-group-item border-bottom-0">{}</li>'.replace('{}',argument[i])
 	}
 	return AddStyle('<ul {style}>{}</ul>'.replace('{}', tmpobj),7);
 }
@@ -317,7 +318,7 @@ function OrderListProcessor(argument){
 	var tmpobj = '';
 
 	for (var i = 0; i < argument.length; i++) {
-		tmpobj += '<li class="border p-3 border-bottom-0">{}</li>'.replace('{}', argument[i])
+		tmpobj += '<li class="border p-2 rounded ">{}</li>'.replace('{}', argument[i])
 	}
 	return AddStyle('<ol {style}>{}</ol>'.replace('{}', tmpobj), 6);
 }
@@ -430,6 +431,7 @@ function InlineRegex(argument){
 	//console.log('({})'.replace('{}',argument));
 	// Code
 	if (REGEX_BLOCK_C.test(argument)){
+		console.log(argument)
 		return CDBLOCKPROCESSOR(argument);
 	} 	
 	// Indent Done
