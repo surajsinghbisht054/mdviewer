@@ -86,17 +86,17 @@ var REGEX_EXP_ALL = new RegExp(EXP_ALL);
 
 DEFAULT_STYLE = [
 //	('Styles', 'Class') <-- Index Number is Key [Use Class for Bootstrap Features]
-	["", 'border p-1'], // 0== Blockquote
-	["", 'ml-5 p-2 border my-4'],	//1== Tab indents
-	['','mx-1'], // 2==> Global 
-	['','text-white p-3 my-4 bg-dark'], // 3==> Programming Codes 
-	['','p-1 px-2 m-2 text-capitalize mt-5'], // 4==> Headings
+	["border-left-style: groove;border-left-color: darkgreen;border-left-width: thick;", 'blockquote pl-1'], // 0== Blockquote
+	["", 'm-5 text-danger '],	//1== Tab indents
+	['','ml-1'], // 2==> Global 
+	['','text-white p-3 my-3 bg-dark'], // 3==> Programming Codes 
+	['','p-1 m-2 text-capitalize mt-3'], // 4==> Headings
 	['','my-4'], // 5==> Horizontal Lines
-	['','list-group ml-2 my-4'], // 6==> Order List
-	['','list-group ml-2 my-4'], // 7==> UnorderList
-	['',' table  mb-3 mt-1 ml-2 table-striped  table-bordered table-hover bg-light mb-4'], // 8==> Table
+	['','ml-1 my-2'], // 6==> Order List
+	['','ml-1 my-2'], // 7==> UnorderList
+	['','table mb-3 mt-1 table-striped'], // 8==> Table
 	['','text-primary text-capitalize mx-2'], // 9 ==> Links
-	['','bg-secondary p-1 text-white'], // 10 ==> Inline Codes
+	['','bg-warning p-1 text-white'], // 10 ==> Inline Codes
 
 
 ]
@@ -205,7 +205,7 @@ function HRRULERPROCESSOR(argument){
 	argument = argument.split('\n')
 	//console.log(argument)
 	if (argument[1]=='===') {
-		ret = '<h1>{}</h1><hr {style} />'.replace('{}', argument[0]);
+		ret = '<br /><h1>{}</h1><hr {style} />'.replace('{}', argument[0]);
 	}
 	else{
 		ret= '<h2>{}</h2><hr {style} />'.replace('{}', argument[0]);
@@ -297,7 +297,7 @@ function UnOrderListProcessor(argument){
 	var tmpobj = '';
 
 	for (var i = 0; i < argument.length; i++) {
-		tmpobj += '<li class="list-group-item border-bottom-0">{}</li>'.replace('{}',argument[i])
+		tmpobj += '<li class="list-group-item border-dark">{}</li>'.replace('{}',argument[i])
 	}
 	return AddStyle('<ul {style}>{}</ul>'.replace('{}', tmpobj),7);
 }
@@ -318,7 +318,7 @@ function OrderListProcessor(argument){
 	var tmpobj = '';
 
 	for (var i = 0; i < argument.length; i++) {
-		tmpobj += '<li class="border p-2 rounded ">{}</li>'.replace('{}', argument[i])
+		tmpobj += '<li class="list-group-item border border-dark">{}</li>'.replace('{}', argument[i])
 	}
 	return AddStyle('<ol {style}>{}</ol>'.replace('{}', tmpobj), 6);
 }
@@ -427,6 +427,17 @@ function InternalProcessors(argument){
 	}
 }
 
+function HRRULER_PROCESSOR(argument) {
+	if (argument.match('_')) {
+		return '<br />'
+	};
+	if (argument.match('-')) {
+		return '<br /><hr class="bg-dark mx-1" />'
+	};
+	
+	return '<hr class="bg-dark mx-1" /><br />'
+}
+
 function InlineRegex(argument){
 	//console.log('({})'.replace('{}',argument));
 	// Code
@@ -452,7 +463,7 @@ function InlineRegex(argument){
 	}
 	// Horizontal Rulers Done
 	else if (REGEX_HRRULER.test(argument)){
-		return '<hr />';
+		return HRRULER_PROCESSOR(argument);
 	}
 	// Order List
 	else if (REGEX_OL_LIST.test(argument)){
