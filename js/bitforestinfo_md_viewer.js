@@ -49,12 +49,12 @@ var OutputID = "MDViewerPreview";
 var EXP_HEADING = '(\n(#+)(.+))' 			// header
 var EXP_HRRULER = '(((\n)(---))|((\n)(___))|((\n)(\\*\\*\\*)))' // horizontal line
 var EXP_OL_LIST = '((\n( *)(\\d+)(\\. )(.*))+)'	// order list
-var EXP_BLOCK_C = '(\n(```)([^]+?)\n(```))' // code block
+var EXP_BLOCK_C = '(\n(```)([^]+?)(```))' // code block
 var EXP_UL_LIST = '((\n( *)([\-\+\*]+ )(.*))+)'  // unorder list
 var EXP_HEAD_HR = '((.+)\n((={3,})|(\\-{3,})))' // ALT heading
 var EXP_TABLEBD = '(\n(\\|?)([\\|\\w \\d]+)(\\|?)\n([ \\-\\|\\:]{7,})\n((\\|?)(.+)(\\|?)\n)+)' // Table
 var EXP_INLINES = '(.+)'
-var EXP_INDENTS = '(\n( {3,})(.+))+'
+var EXP_INDENTS = '(\n( {4,})(.+))+'
 var EXP_JOINER  = '|'
 
 
@@ -97,7 +97,7 @@ DEFAULT_STYLE = [
 	['','table mb-3 mt-1 table-striped'], // 8==> Table
 	['','text-primary text-capitalize mx-2'], // 9 ==> Links
 	['','bg-warning p-1 text-white'], // 10 ==> Inline Codes
-
+	['','img-thumbnail mx-auto d-block'], // 11 ==> Image Feature
 
 ]
 
@@ -221,7 +221,7 @@ function CDBLOCKPROCESSOR(argument){
 	//		<pre></pre> Tag Attached To Arguments
 	//
 
-	argument = argument.indexslice(4, -4);
+	argument = argument.indexslice(4, -2);
 
 	return AddStyle("<pre {style}>{}</pre>".replace('{}', argument), 3);
 }
@@ -367,7 +367,7 @@ function LittleProcessor(txt, exp, element, opentag, closetag){
 }
 
 // Function To process Links
-function LinksProcessor(argument){
+function LinksProcessor(argument1){
 	// Input:
 	//		argument = Text
 	//	Output:
@@ -375,19 +375,29 @@ function LinksProcessor(argument){
 	//
 
 	tmptxt = ''
-	argument = argument.split(RegExp('(\\[.+?\\]\\(.+?\\))')).filter(String)
-
+	argument = argument1.split(RegExp('(\\[.+?\\]\\(.+?\\))')).filter(String)
+	
 	for (var i = 0; i < argument.length; i++) {
 		if(argument[i][0]=='['){
 			// Link EXP
 			s=argument[i];
 			s=s.indexslice(1, s.length-1).split('](')
-			tmptxt += '<a href="{0}" {style}>{}</a>'.replace('{0}', s[1]).replace('{}', s[0])
+			if (argument1.match('!')) {
+				
+				tmptxt += '<img src="{0}" alt="{}" {style} width="50%" />'.replace('{0}', s[1]).replace('{}', s[0])
+			}else{
+				tmptxt += '<a href="{0}" {style}>{}</a>'.replace('{0}', s[1]).replace('{}', s[0])
+			}
+			
 		}
 		else{
-			tmptxt += argument[i]
+			tmptxt += argument[i];			
 		}
 	}
+	if (argument1.match('!')) {
+		return AddStyle(tmptxt.replace('!',' '), 11);	
+	};
+	
 	return AddStyle(tmptxt, 9);
 }
 
