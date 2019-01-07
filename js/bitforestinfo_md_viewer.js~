@@ -96,7 +96,7 @@ DEFAULT_STYLE = [
 	['','ml-1 my-2'], // 7==> UnorderList
 	['','table mb-3 mt-1 table-striped'], // 8==> Table
 	['','text-primary text-capitalize mx-2'], // 9 ==> Links
-	['','bg-warning p-1 text-white'], // 10 ==> Inline Codes
+	['','bg-success p-1 px-2 rounded text-white'], // 10 ==> Inline Codes
 	['','img-thumbnail mx-auto d-block'], // 11 ==> Image Feature
 
 ]
@@ -384,7 +384,7 @@ function LinksProcessor(argument1){
 			s=s.indexslice(1, s.length-1).split('](')
 			if (argument1.match('!')) {
 				
-				tmptxt += '<img src="{0}" alt="{}" width="50%" />'.replace('{0}', s[1]).replace('{}', s[0])
+				tmptxt += '<img src="{0}" alt="{}" {style} width="50%" />'.replace('{0}', s[1]).replace('{}', s[0])
 			}else{
 				tmptxt += '<a href="{0}" {style}>{}</a>'.replace('{0}', s[1]).replace('{}', s[0])
 			}

@@ -96,7 +96,7 @@ DEFAULT_STYLE = [
 	['','ml-1 my-2'], // 7==> UnorderList
 	['','table mb-3 mt-1 table-striped'], // 8==> Table
 	['','text-primary text-capitalize mx-2'], // 9 ==> Links
-	['','bg-warning p-1 text-white'], // 10 ==> Inline Codes
+	['','bg-success p-1 px-2 rounded text-white'], // 10 ==> Inline Codes
 	['','img-thumbnail mx-auto d-block'], // 11 ==> Image Feature
 
 ]
@@ -452,7 +452,7 @@ function InlineRegex(argument){
 	//console.log('({})'.replace('{}',argument));
 	// Code
 	if (REGEX_BLOCK_C.test(argument)){
-		console.log(argument)
+		//console.log(argument)
 		return CDBLOCKPROCESSOR(argument);
 	} 	
 	// Indent Done
