@@ -56,11 +56,13 @@ var EXP_TABLEBD = '(\n(\\|?)([\\|\\w \\d]+)(\\|?)\n([ \\-\\|\\:]{7,})\n((\\|?)(.
 var EXP_INLINES = '(.+)'
 var EXP_INDENTS = '(\n( {4,})(.+))+'
 var EXP_JOINER  = '|'
+var EXP_BLOCKQ  = '((\n)(&gt;+?)(.+))'
 
 
 // All Expression
 EXP_ALL = ''
 EXP_ALL = EXP_ALL + EXP_BLOCK_C + EXP_JOINER
+EXP_ALL = EXP_ALL + EXP_BLOCKQ  + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_HRRULER + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_HEADING + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_TABLEBD + EXP_JOINER
@@ -82,6 +84,7 @@ var REGEX_TABLEBD = new RegExp(EXP_TABLEBD);
 var REGEX_INLINES = new RegExp(EXP_INLINES);
 var REGEX_INDENTS = new RegExp(EXP_INDENTS);
 var REGEX_EXP_ALL = new RegExp(EXP_ALL);
+var REGEX_BLOCK_Q = new RegExp(EXP_BLOCKQ);
 
 
 DEFAULT_STYLE = [
@@ -96,7 +99,7 @@ DEFAULT_STYLE = [
 	['','ml-1 my-2'], // 7==> UnorderList
 	['','table mb-3 mt-1 table-striped'], // 8==> Table
 	['','text-primary text-capitalize mx-2'], // 9 ==> Links
-	['','bg-success p-1 px-2 rounded text-white'], // 10 ==> Inline Codes
+	['background: lightblue;color: black;','p-1 px-2'], // 10 ==> Inline Codes
 	['','img-thumbnail mx-auto d-block'], // 11 ==> Image Feature
 
 ]
@@ -424,12 +427,13 @@ function InternalProcessors(argument){
 	// blockquote
 	//argument = LittleProcessor(argument, '(>)(.+?)(\\n)', ['>','\n'], '<code style="background: red;">','</code>');
 	
-	if (argument.match('&gt;')){
+	/*if (argument.match('&gt; ')){
 		//console.log(argument.split(RegExp('(.+?)(&gt;)([^<]+)')));
 		argument = '<div {style} >{0}</div>'.replace('{0}',argument);
 		argument = AddStyle(argument, 0, 'margin-left: '+argument.match(/&gt;/g).length+'0px;'); 
 		argument = argument.replace(/&gt;/g,"");
 	};
+	*/
 	// Links Processor
 	argument = LinksProcessor(argument)
 
@@ -458,6 +462,14 @@ function InlineRegex(argument){
 	// Indent Done
 	else if (REGEX_INDENTS.test(argument)){
 		return IndentProcessor(argument)
+	}
+	// Blockquote
+	else if(REGEX_BLOCK_Q.test(argument)){
+		//console.log(argument);
+		tmp = '<pre {style} >{0}</pre>'.replace('{0}',argument);
+		tmp = AddStyle(tmp, 0, 'margin-left: '+tmp.match(/&gt;/g).length+'0px;'); 
+		tmp = tmp.replace(/&gt;/g,"");
+		return tmp;
 	}
 	// Table
 	else if (REGEX_TABLEBD.test(argument)){
