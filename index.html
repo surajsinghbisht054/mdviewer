@@ -54,7 +54,7 @@
     <!-- container for textarea for input -->
     <div class="container">
       <div class="row">
-        <div class="col-lg-6" id="markdown">
+        <div class="col-sm-6" id="markdown">
            <h3>MARKDOWN</h3>
            <textarea id="MDEditor" style="background-color:lavender;">
 
@@ -201,7 +201,12 @@
 
 
            Markdown | Less | Pretty
-           --- | --- | ---
+           --- | --- | ---  <script type="text/javascript">
+      function markdown(){
+        var changes = document.getElementId("MDEditor");
+        changes.
+      }
+    </script>
            *Still* | `renders` | **nicely**
            1 | 2 | 3
 
@@ -253,7 +258,7 @@
            afsdfsfdaasdf
 
            ### [\<ins>](https://github.com/markdown-it/markdown-it-ins)
-
+tabfunction
            ++Inserted text++
 
 
@@ -320,7 +325,7 @@
 
  			</textarea>
     </div>
-        <div class="col-lg-6" id="htmlpreview">
+        <div class="col-sm-6" id="htmlpreview">
           <h3>HTML</h3>
           <textarea id="MDViewerPreview" style="background-color:lavenderblush;"></textarea>
         </div>
@@ -329,12 +334,6 @@
     <script type="text/javascript">
       // Bind Keys
       bindkey();
-    </script>
-    <script type="text/javascript">
-      function markdown(){
-        var changes = document.getElementId("MDEditor");
-        changes.
-      }
     </script>
   </body>
 </html>

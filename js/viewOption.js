@@ -4,13 +4,16 @@ function mdViewFunction() {
   // conditions to set textarea
   if (markdown.style.display === "none") {
     // show the markdwon area
-    markdwon.style.display = "block";
+    markdown.style.display = "block";
+    console.log('display markdown');
+    markdown.style.width = '1200px';
 
     // and hide htmlpreview area.
     htmlpreview.style.display = "none";
   } else {
     // hide the htmlpreview textarea
     htmlpreview.style.display = "none";
+    console.log('hide htmlpreview');
   }
 }
 
@@ -22,11 +25,13 @@ function htmlViewFunction() {
   if (htmlpreview.style.display === "none") {
     // show the htmlpreview area
     htmlpreview.style.display = "block";
+    console.log('show htmlpreview');
     // and hide markdown area
     markdown.style.display = "none";
   } else {
     // markdown are set to hide
     markdown.style.display = "none";
+    console.log('hide markdown');
   }
 }
 
