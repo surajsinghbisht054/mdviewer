@@ -14,7 +14,11 @@ function mdViewFunction() {
     // hide the htmlpreview textarea
     htmlpreview.style.display = "none";
     console.log('hide htmlpreview');
+
   }
+
+    MDViewerPreview.style.width="1200px";
+    MDEditor.style.width = "1200px";
 }
 
 
@@ -33,6 +37,9 @@ function htmlViewFunction() {
     markdown.style.display = "none";
     console.log('hide markdown');
   }
+
+  MDViewerPreview.style.width="1200px";
+    MDEditor.style.width = "1200px";
 }
 
 function bothViewFunction(){
@@ -48,6 +55,10 @@ function bothViewFunction(){
     htmlpreview.style.display = "block";
     markdown.style.display = "block";
 
+    MDViewerPreview.style.width="550px";
+    MDEditor.style.width = "550px";
+
+
   }
 
   // this condition triggers when we came from markdown button.
@@ -56,6 +67,8 @@ function bothViewFunction(){
     htmlpreview.style.display = "block";
     markdown.style.display = "block";
 
+    MDViewerPreview.style.width="550px";
+    MDEditor.style.width = "550px";
   }
 
 }
