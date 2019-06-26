@@ -6,7 +6,7 @@
 var InputID = "MDEditor";
 
 // preview div id
-var OutputID = "MDViewerPreview"; 
+var OutputID = "MDViewerPreview";
 
 // Attributes Properties
 DEFAULT_PROPERTIES = 'font-style: normal;line-height: normal;font-size: xx-small;';
@@ -57,7 +57,7 @@ HEADING_SIX   = 'font-size: xx-small;'
 var EXP_HEADING = '((\n)(#+)(.+))' // Works Correctly
 var EXP_HRRULER = '(((\n{1})(---))|((\n{1})(___))|((\n{1})(\\*\\*\\*)))' // works correctly
 var EXP_OL_LIST = '((\n)(((    )*|(\t)*)(\d+\\. )(.*)\n)+(\n))'
-EXP_OL_LIST = '(\n)(\d+\\. )(.*)' 
+EXP_OL_LIST = '(\n)(\d+\\. )(.*)'
 console.log(EXP_OL_LIST)
 var EXP_UL_LIST = '(((\n{1})(\\+)(.+))|((\n{1})(\-)(.+)))'
 var EXP_INLINES = '(.+)'
@@ -75,10 +75,10 @@ var EXP_ALL = ''
 EXP_ALL = EXP_ALL +  EXP_HRRULER + EXP_JOINER
 EXP_ALL = EXP_ALL +  EXP_BLOCK_C + EXP_JOINER
 EXP_ALL = EXP_ALL +  EXP_INDNT_C + EXP_JOINER
-EXP_ALL = EXP_ALL +  EXP_TABLE_J + EXP_JOINER 
+EXP_ALL = EXP_ALL +  EXP_TABLE_J + EXP_JOINER
 //EXP_ALL = EXP_ALL +  + EXP_JOINER
 //EXP_ALL = EXP_ALL +  + EXP_JOINER
-EXP_ALL = EXP_ALL + EXP_HEADING + EXP_JOINER 
+EXP_ALL = EXP_ALL + EXP_HEADING + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_OL_LIST + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_UL_LIST + EXP_JOINER
 EXP_ALL = EXP_ALL + EXP_INLINES
@@ -153,7 +153,7 @@ function LinkProcess(argument){
 function tagstyle(txt){
 
 	// Heading
-	if (String.match(txt, EXP_HEADING)){ 
+	if (String.match(txt, EXP_HEADING)){
 		return HeadingProcessor(txt);
 
 	} else if (String.match(txt, EXP_HRRULER)) {
@@ -183,7 +183,7 @@ function tagstyle(txt){
 	}
 }
 
-// Process Parent Regex 
+// Process Parent Regex
 function ParentRegex(text){
 	// HTML Elements Nodes
 	var node = [];
@@ -195,12 +195,12 @@ function ParentRegex(text){
 	for (var i = 0; i < result.length; i++) {
 		// create elemen
 		obj = result[i];
-		
+
 		//obj = tagstyle(obj);
 
 		// Set Default Properties
 		//obj.style=DEFAULT_PROPERTIES;
-		
+
 		// Push Object Into List
 		node.push(obj);
 	}
@@ -234,8 +234,8 @@ function InlineRegex(argument){
 	argument = replaceAll(argument, ' `' , '<code>')
 
 	argument = replaceAll(argument, ' `' , '<code>')
-	argument = replaceAll(argument, ' `' , '<code>')	
-	
+	argument = replaceAll(argument, ' `' , '<code>')
+
 
 	return argument;
 }
@@ -248,9 +248,9 @@ function MDTOHTML(inp, out){
 	// input text
 	var input_text = '\n' + inp.value;
 
-	// if text, then call 
+	// if text, then call
 	if (input_text) {
-	
+
 		// Call Parent Tag Processor Function
 		var parentnodes = ParentRegex(input_text);
 		for (var i = 0; i < parentnodes.length; i++) {
@@ -273,7 +273,7 @@ function preview() {
 	if ((inptext) && (outtext)) {
 		// Call Markdown To html Conversion function
 		var nodes = MDTOHTML(inptext, outtext);
-	
+
 		// if nodes
 		if (nodes) {
 			outtext.innerHTML = nodes;
@@ -296,4 +296,4 @@ if (inptext.Editor.addEventListener) {
 	if (inptext.Editor.attachEvent) {
 		inptext.Editor.attachEvent('onpropertychange', preview);
 	}
-}; 
+};

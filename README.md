@@ -7,6 +7,7 @@ Simple Javascript Codes, That Can Convert Your Markdown Codes Into HTML.
 Author:
 		Suraj Singh Bisht
 			Surajsinghbisht054@gmail.com
+				www.blaregroup.com
 				www.bitforestinfo.com
 					github.com/surajsinghbisht054
 
